@@ -3,141 +3,162 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FlipMyPay - Mega Sale Handpicked Deals</title>
+  <title>FlipMyPay - Best Handpicked Deals</title>
   <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --amazon-color: #f59e0b;
+      --amazon-hover: #d97706;
+      --flipkart-color: #2563eb;
+      --flipkart-hover: #1d4ed8;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #f1f5f9;
-      color: #0f172a;
-      line-height: 1.5;
-      padding-bottom: 3rem;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.4;
+      padding-bottom: 4rem;
     }
+
+    /* Minimalist Elegant Header */
     header {
-      background: linear-gradient(135deg, #1e3a8a, #0284c7);
-      color: #ffffff;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
       text-align: center;
-      padding: 2.5rem 1rem 2rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 2rem 1rem 1.5rem;
     }
-    header h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; }
-    header p { font-size: 0.95rem; opacity: 0.9; margin-top: 0.4rem; }
-    
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #0f172a;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
     .container {
-      max-width: 1000px;
-      margin: 1.5rem auto 0;
+      max-width: 980px;
+      margin: 1rem auto 0;
       padding: 0 1rem;
     }
 
+    /* Section Headings */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 2.2rem 0 1rem;
+    }
+    .section-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .section-header .line {
+      flex-grow: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Cards Grid */
     .deals-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
     }
 
     .deal-card {
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid #e2e8f0;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      position: relative;
+      justify-content: space-between;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
     .deal-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }
 
-    .badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: #dc2626;
-      color: #ffffff;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      text-transform: uppercase;
-      z-index: 2;
-    }
-
-    .img-wrapper {
-      width: 100%;
-      height: 180px;
-      background: #f8fafc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      border-bottom: 1px solid #f1f5f9;
-    }
-    .img-wrapper img {
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-    }
-
-    .card-body {
-      padding: 1rem;
+    .card-top {
+      padding: 1rem 1rem 0.5rem;
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
-    }
-    .card-body h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 0.4rem;
-      line-height: 1.35;
-    }
-    .card-body p {
-      font-size: 0.85rem;
-      color: #64748b;
-      flex-grow: 1;
-      margin-bottom: 0.75rem;
-    }
-
-    .price-row {
-      display: flex;
-      align-items: baseline;
       gap: 0.5rem;
-      margin-bottom: 0.85rem;
     }
-    .price { font-size: 1.25rem; font-weight: 800; color: #0f172a; }
-    .mrp { font-size: 0.85rem; text-decoration: line-through; color: #94a3b8; }
-    .discount { font-size: 0.8rem; font-weight: 700; color: #16a34a; }
 
+    .tag-store {
+      align-self: flex-start;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+    }
+    .tag-amazon { background: #fef3c7; color: #92400e; }
+    .tag-flipkart { background: #dbeafe; color: #1e40af; }
+
+    .deal-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1e293b;
+      line-height: 1.35;
+      min-height: 2.7em;
+    }
+
+    .card-bottom {
+      padding: 0.5rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .price {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    /* Conversion Buttons */
     .btn {
       display: block;
       width: 100%;
       text-align: center;
-      padding: 0.7rem;
-      border-radius: 8px;
-      font-weight: 700;
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
       text-decoration: none;
-      font-size: 0.9rem;
-      cursor: pointer;
+      transition: background 0.15s ease;
     }
     .btn-amazon {
-      background-color: #f59e0b;
+      background-color: var(--amazon-color);
       color: #111827;
     }
-    .btn-amazon:hover { background-color: #d97706; }
+    .btn-amazon:hover { background-color: var(--amazon-hover); }
     .btn-flipkart {
-      background-color: #2563eb;
+      background-color: var(--flipkart-color);
       color: #ffffff;
     }
-    .btn-flipkart:hover { background-color: #1d4ed8; }
+    .btn-flipkart:hover { background-color: var(--flipkart-hover); }
 
     footer {
       text-align: center;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: #94a3b8;
-      margin-top: 2.5rem;
+      margin-top: 3.5rem;
       padding: 0 1rem;
     }
   </style>
@@ -145,66 +166,123 @@
 <body>
 
   <header>
-    <h1>🔥 FlipMyPay Top Deals</h1>
-    <p>Curated flash discounts & best price drops from Amazon & Flipkart</p>
+    <h1>FlipMyPay</h1>
+    <p>Curated Top Deals & Verified Price Drops</p>
   </header>
 
   <div class="container">
-    <div class="deals-grid">
-
-      <!-- ================= PRODUCT 1 (YOUR AMAZON REFRIGERATOR) ================= -->
-      <div class="deal-card">
-        <span class="badge">Amazon Deal</span>
-        <div class="img-wrapper">
-          <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=500&auto=format&fit=crop&q=60" alt="Double Door Refrigerator" />
-        </div>
-        <div class="card-body">
-          <h3>Samsung 236L Double Door Refrigerator</h3>
-          <p>Digital Inverter, Frost Free, 3 Star with convertible mode.</p>
-          
-          <div class="price-row">
-            <span class="price">₹22,990</span>
-            <span class="mrp">₹31,990</span>
-            <span class="discount">28% OFF</span>
-          </div>
-
-          <!-- YOUR ACTUAL AFFILIATE LINK ADDED HERE -->
-          <a href="https://link.amazon/B07w1fv8S" class="btn btn-amazon" target="_blank" rel="nofollow sponsored noopener">
-            Buy on Amazon
-          </a>
-        </div>
-      </div>
-      <!-- ======================================================================= -->
-
-      <!-- ================= PRODUCT 2 (FLIPKART EXAMPLE) ================= -->
-      <div class="deal-card">
-        <span class="badge">Flipkart Deal</span>
-        <div class="img-wrapper">
-          <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop&q=60" alt="Smartwatch" />
-        </div>
-        <div class="card-body">
-          <h3>Noise ColorFit Pulse 2 Max</h3>
-          <p>1.85" Display, Bluetooth Calling with 10 days battery life.</p>
-          
-          <div class="price-row">
-            <span class="price">₹1,199</span>
-            <span class="mrp">₹4,999</span>
-            <span class="discount">76% OFF</span>
-          </div>
-
-          <a href="https://flipkart.com" class="btn btn-flipkart" target="_blank" rel="nofollow sponsored noopener">
-            Buy on Flipkart
-          </a>
-        </div>
-      </div>
-      <!-- =================================================================== -->
-
+    <!-- SECTION 1 -->
+    <div class="section-header">
+      <h2>🔥 Amazon Deals</h2>
+      <div class="line"></div>
     </div>
+    <div class="deals-grid" id="sec-amazon"></div>
+
+    <!-- SECTION 2 -->
+    <div class="section-header">
+      <h2>⚡ Flipkart Deals</h2>
+      <div class="line"></div>
+    </div>
+    <div class="deals-grid" id="sec-flipkart"></div>
+
+    <!-- SECTION 3 -->
+    <div class="section-header">
+      <h2>❄️ Refrigerators & Appliances</h2>
+      <div class="line"></div>
+    </div>
+    <div class="deals-grid" id="sec-appliances"></div>
+
+    <!-- SECTION 4 -->
+    <div class="section-header">
+      <h2>📱 Mobiles & Gadgets</h2>
+      <div class="line"></div>
+    </div>
+    <div class="deals-grid" id="sec-mobiles"></div>
 
     <footer>
       <p>*Affiliate Disclosure: FlipMyPay participates in affiliate advertising programs (including Amazon Associates & Flipkart Affiliate Program) designed to provide a means to earn fees by linking to affiliated sites at no additional cost to you.</p>
     </footer>
   </div>
 
+  <!-- ================= FAST DEAL MANAGER ================= -->
+  <script>
+    /*
+      ONLY 5 SIMPLE FIELDS PER ITEM:
+      - section: "amazon", "flipkart", "appliances", or "mobiles"
+      - store:   "amazon" or "flipkart"
+      - title:   Product Name
+      - price:   e.g. "₹22,990"
+      - link:    Your tracking affiliate link
+    */
+    const deals = [
+      // 1. YOUR REFRIGERATOR
+      {
+        section: "appliances",
+        store: "amazon",
+        title: "Samsung 236L Double Door Refrigerator",
+        price: "₹22,990",
+        link: "https://link.amazon/B07w1fv8S"
+      },
+
+      // 2. AMAZON DEAL
+      {
+        section: "amazon",
+        store: "amazon",
+        title: "Sony WH-1000XM5 Wireless ANC Headphones",
+        price: "₹26,990",
+        link: "https://link.amazon/B07w1fv8S"
+      },
+
+      // 3. FLIPKART DEAL
+      {
+        section: "flipkart",
+        store: "flipkart",
+        title: "Noise ColorFit Pulse 2 Max Smartwatch",
+        price: "₹1,199",
+        link: "https://flipkart.com"
+      },
+
+      // 4. MOBILE DEAL
+      {
+        section: "mobiles",
+        store: "amazon",
+        title: "OnePlus 12R 5G (16GB RAM, 256GB)",
+        price: "₹39,999",
+        link: "https://amazon.in"
+      }
+    ];
+
+    // AUTOMATIC BUILDER (DO NOT TOUCH)
+    function render() {
+      deals.forEach(item => {
+        const container = document.getElementById("sec-" + item.section);
+        if (!container) return;
+
+        const isAmazon = item.store.toLowerCase() === "amazon";
+        const tagClass = isAmazon ? "tag-amazon" : "tag-flipkart";
+        const storeLabel = isAmazon ? "Amazon" : "Flipkart";
+        const btnClass = isAmazon ? "btn-amazon" : "btn-flipkart";
+        const btnText = isAmazon ? "Buy on Amazon" : "Buy on Flipkart";
+
+        const card = document.createElement("div");
+        card.className = "deal-card";
+        card.innerHTML = `
+          <div class="card-top">
+            <span class="tag-store ${tagClass}">${storeLabel}</span>
+            <h3>${item.title}</h3>
+          </div>
+          <div class="card-bottom">
+            <div class="price">${item.price}</div>
+            <a href="${item.link}" class="btn ${btnClass}" target="_blank" rel="nofollow sponsored noopener">
+              ${btnText}
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    render();
+  </script>
 </body>
 </html>
