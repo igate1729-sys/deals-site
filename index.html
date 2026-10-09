@@ -131,12 +131,12 @@
       color: #0f172a;
     }
 
-    /* Conversion Buttons */
+    /* Action Buttons */
     .btn {
       display: block;
       width: 100%;
       text-align: center;
-      padding: 0.6rem 0.8rem;
+      padding: 0.65rem 0.8rem;
       border-radius: 6px;
       font-weight: 600;
       font-size: 0.85rem;
@@ -167,7 +167,7 @@
 
   <header>
     <h1>FlipMyPay</h1>
-    <p>Curated Top Deals & Verified Price Drops</p>
+    <p>Curated Top Deals & Verified Offers</p>
   </header>
 
   <div class="container">
@@ -177,7 +177,7 @@
       <div class="line"></div>
     </div>
     <div class="deals-grid" id="sec-amazon"></div>
-   
+
     <!-- SECTION 2 -->
     <div class="section-header">
       <h2>⚡ Flipkart Deals</h2>
@@ -207,52 +207,32 @@
   <!-- ================= FAST DEAL MANAGER ================= -->
   <script>
     /*
-      ONLY 5 SIMPLE FIELDS PER ITEM:
+      FIELDS PER ITEM:
       - section: "amazon", "flipkart", "appliances", or "mobiles"
       - store:   "amazon" or "flipkart"
-      - title:   Product Name
-      - price:   e.g. "₹22,990"
+      - title:   Short product name
       - link:    Your tracking affiliate link
+      - price:   (Optional) Leave blank "" if you don't want to show price
     */
     const deals = [
-      // 1. YOUR REFRIGERATOR
-      {
-        section: "appliances",
-        store: "amazon",
-        title: "Samsung 236L Double Door Refrigerator(a)",
-        price: "₹72,990",
-        link: "https://amzn.to/3TT8EW7"
-      },
-      
-      // 2. AMAZON DEAL
-      {
-        section: "amazon",
-        store: "amazon",
-        title: "Sony WH-1000XM5 Wireless ANC Headphones",
-        price: "₹26,990",
-        link: "https://link.amazon/B07w1fv8S"
-      },
-
-      // 3. FLIPKART DEAL
+      // 1. XIAOMI 32" SMART GOOGLE TV (FLIPKART)
       {
         section: "flipkart",
         store: "flipkart",
-        title: "Noise ColorFit Pulse 2 Max Smartwatch",
-        price: "₹1,199",
-        link: "https://flipkart.com"
+        title: "Xiaomi 32\" HD Ready Smart Google TV",
+        link: "https://www.flipkart.com/xiaomi-80-cm-32-inch-hd-ready-led-smart-google-tv-200-free-channels-hdr-10-dolby-audio-premium-metal-bezel-less-design-dts-x-virtual-mi/p/itmd725f7f90df3f?pid=TVSHBPGHSNN2MTWJ&lid=LSTTVSHBPGHSNN2MTWJJBWOQN&marketplace=FLIPKART&q=32+inch+tv&store=ckf%2Fczl&srno=s_1_3&otracker=search&otracker1=search&fm=Search&iid=50da550d-7e23-427d-960e-d3e1e6689d57.TVSHBPGHSNN2MTWJ.SEARCH&ppt=sp&ppn=sp&ssid=r9nhd3epds0000001791558322054&qH=f5ebdd82fe009772&ov_redirect=true?affid=venky0151"
       },
 
-      // 4. MOBILE DEAL
+      // 2. SAMSUNG REFRIGERATOR (AMAZON)
       {
-        section: "mobiles",
+        section: "appliances",
         store: "amazon",
-        title: "OnePlus 12R 5G (16GB RAM, 256GB)",
-        price: "₹39,999",
-        link: "https://amazon.in"
+        title: "Samsung 236L Double Door Refrigerator",
+        link: "https://link.amazon/B07w1fv8S"
       }
     ];
 
-    // AUTOMATIC BUILDER (DO NOT TOUCH)
+    // AUTOMATIC BUILDER
     function render() {
       deals.forEach(item => {
         const container = document.getElementById("sec-" + item.section);
@@ -263,6 +243,7 @@
         const storeLabel = isAmazon ? "Amazon" : "Flipkart";
         const btnClass = isAmazon ? "btn-amazon" : "btn-flipkart";
         const btnText = isAmazon ? "Buy on Amazon" : "Buy on Flipkart";
+        const priceHtml = item.price ? `<div class="price">${item.price}</div>` : '';
 
         const card = document.createElement("div");
         card.className = "deal-card";
@@ -272,7 +253,7 @@
             <h3>${item.title}</h3>
           </div>
           <div class="card-bottom">
-            <div class="price">${item.price}</div>
+            ${priceHtml}
             <a href="${item.link}" class="btn ${btnClass}" target="_blank" rel="nofollow sponsored noopener">
               ${btnText}
             </a>
